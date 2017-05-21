@@ -23,10 +23,22 @@
             <ul v-for="(element, index) in elementsInList" >
                 <li :is="element.selected" :elementId="index"></li>
                 <div class="block">
-                    <a class="button is-primary" @click="removeElement(index)">Izbriši me</a>
-                </div>
-                <div class="">
-                    <a class="button is-primary" @click="moveDown(index)">MoveDown</a>
+                    <a class="icon" @click="moveUp(index)">
+                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                    </a>
+                    <a class="icon" @click="moveDown(index)">
+                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                    </a>
+                    <a class="delete" @click="isVisible = true"></a>
+                    <div class="modal is-active" v-show="isVisible">                       
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                            Are you sure that you want delete this element?<br>
+                            <a class="button is-danger" @click="removeElement(index)">Yes</a>
+                            <a class="button is-success" @click="isVisible = false">No</a>
+                        </div>
+                        <button class="modal-close" @click="isVisible = false"></button>
+                    </div>
                 </div>
             </ul>
         </div>
@@ -40,7 +52,8 @@ export default {
   data () {
     return {
       selectedElement: 'element-1',
-      elementsInList: []
+      elementsInList: [],
+      isVisible: false
     }
   },
   methods: {
@@ -49,13 +62,17 @@ export default {
     },
     removeElement (index) {
       this.elementsInList.splice(index, 1)
+      this.isVisible = false
     },
     moveDown (index) {
       let from = index
       let to = index + 1
-      /* this.elementsInList.splice(index + 1, 1, element)
-      this.elementsInList.splice(index, 1, temp) */
-      this.elementsInList.splice(to, 0, this.splice(from, 1)[0])
+      this.elementsInList.splice(to, 0, this.elementsInList.splice(from, 1)[0])
+    },
+    moveUp (index) {
+      let from = index
+      let to = index - 1
+      this.elementsInList.splice(to, 0, this.elementsInList.splice(from, 1)[0])
     }
   },
   components: {
