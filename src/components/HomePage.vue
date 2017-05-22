@@ -6,7 +6,7 @@
                 <p class="menu-label">
                     Add new element
                 </p>
-                Select element:<br>
+                <p class="label">Select element:</p>
                 <select v-model="selectedElement">
                     <option value="element-1">First element</option>
                     <option value="element-2">Second element</option>
@@ -15,32 +15,34 @@
                 <div class="block">
                     <a class="button is-primary" @click="addElement">Add</a>
                 </div>
+                <div class="utm-input-field-wrapper column is-half center">
+                    <p class="menu-label">
+                        Enter UTM campaign name:
+                    </p>
+                    <input class="input is-primary is-6" v-model="utmCampaignName"></input>
+                </div>
             </aside>
         </div>
         <div class="column">
             <h1 class="title">Mian content</h1>
-            <!-- <div v-for="(element, index) in elementsInList" :is="element.selected" :elementId="index"></div> -->
-            <ul v-for="(element, index) in elementsInList" >
-                <li :is="element.selected" :elementId="index"></li>
-                <div class="block">
-                    <a class="icon" @click="moveUp(index)">
-                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                    </a>
-                    <a class="icon" @click="moveDown(index)">
-                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                    </a>
-                    <a class="delete" @click="isVisible = true"></a>
-                    <div class="modal is-active" v-show="isVisible">                       
-                        <div class="modal-background"></div>
-                        <div class="modal-content">
-                            Are you sure that you want delete this element?<br>
-                            <a class="button is-danger" @click="removeElement(index)">Yes</a>
-                            <a class="button is-success" @click="isVisible = false">No</a>
-                        </div>
-                        <button class="modal-close" @click="isVisible = false"></button>
+            <div class="elements-wrapper center" v-for="(element, index) in elementsInList" >
+                <article class="message is-dark">
+                    <div class="message-header">
+                        <h3 class="element-name">{{ element.selected }}
+                            <div class="icons">
+                                <a class="icon" @click="moveUp(index)">
+                                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                </a>
+                                <a class="icon" @click="moveDown(index)">
+                                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                </a>
+                                <a class="delete" @click="removeElement(index)"></a>
+                            </div>
+                        </h3>
                     </div>
-                </div>
-            </ul>
+                    <div :is="element.selected" :elementId="index" :utmCampaignName="utmCampaignName" class="message-body"></div>
+                </article>
+            </div>
         </div>
     </div>
   </div>
@@ -53,7 +55,8 @@ export default {
     return {
       selectedElement: 'element-1',
       elementsInList: [],
-      isVisible: false
+      utmCampaignName: '2016-02-05-test'
+      // isVisible: false
     }
   },
   methods: {
@@ -62,7 +65,6 @@ export default {
     },
     removeElement (index) {
       this.elementsInList.splice(index, 1)
-      this.isVisible = false
     },
     moveDown (index) {
       let from = index
@@ -87,5 +89,23 @@ export default {
 <style scoped>
     .block {
         padding: 20px 0 0 0;    
+    }
+    article {
+        padding: 20px 0;
+    }
+    .center {
+        margin: 0 auto;
+    }
+    .elements-wrapper {
+        max-width: 700px;
+        width: 100%;
+    }
+    .element-name {
+        text-align: left;
+        font-size: 16px;
+    }
+    .icons {
+        float: right;
+        display: inline-block;
     }
 </style>
