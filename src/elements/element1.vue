@@ -1,7 +1,8 @@
 <template>
     <div>
         Element1<br>
-        Index: {{ elementId }}
+        Index: {{ elementId }}<br>
+        Campaign name: {{ utmCampaignName }}
     </div>
     
 </template>
@@ -9,7 +10,7 @@
 <script>
 export default {
   name: 'element1',
-  props: ['elementId']
+  props: ['elementId', 'utmCampaignName']
 }
 
 </script>
