@@ -21,6 +21,9 @@
                     </p>
                     <input class="input is-primary is-6" v-model="utmCampaignName"></input>
                 </div>
+                <div class="block">
+                    <a class="button is-primary" @click="createHtmlFile()">Export HTML</a>
+                </div>
             </aside>
         </div>
         <div class="column">
@@ -40,7 +43,7 @@
                             </div>
                         </h3>
                     </div>
-                    <div :is="element.selected" :elementId="index" :utmCampaignName="utmCampaignName" class="message-body"></div>
+                    <div :id="'content-element-' + index" :is="element.selected" :elementId="index" :utmCampaignName="utmCampaignName" class="message-body"></div>
                 </article>
             </div>
         </div>
@@ -75,6 +78,27 @@ export default {
       let from = index
       let to = index - 1
       this.elementsInList.splice(to, 0, this.elementsInList.splice(from, 1)[0])
+    },
+    download (filename, text) {
+      var pom = document.createElement('a')
+      pom.setAttribute('href', 'data:text/text;charset=utf-8,' + encodeURIComponent(text))
+      pom.setAttribute('download', filename)
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents')
+        event.initEvent('click', true, true)
+        pom.dispatchEvent(event)
+      } else {
+        pom.click()
+      }
+    },
+    createHtmlFile () {
+      var elementsToExport = []
+      for (let i = 0; i < this.elementsInList.length; i++) {
+        let getElement = document.getElementById('content-element-' + i).innerHTML
+        elementsToExport.push(getElement)
+      }
+      elementsToExport.toString()
+      this.download('test.txt', elementsToExport)
     }
   },
   components: {
