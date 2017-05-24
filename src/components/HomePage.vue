@@ -9,8 +9,8 @@
                 <p class="label">Select element:</p>
                 <select v-model="selectedElement">
                     <option value="element-1">First element</option>
-                    <option value="element-2">Second element</option>
-                    <option value="element-3">Third element</option>
+                    <option value="main-head-element">Header</option>
+                    <option value="main-image-element">Main Image</option>
                 </select>
                 <div class="block">
                     <a class="button is-primary" @click="addElement">Add</a>
@@ -43,7 +43,7 @@
                             </div>
                         </h3>
                     </div>
-                    <div :id="'content-element-' + index" :is="element.selected" :elementId="index" :utmCampaignName="utmCampaignName" class="message-body"></div>
+                    <div :is="element.selected" :elementId="index" :utmCampaignName="utmCampaignName" class="message-body"></div>
                 </article>
             </div>
         </div>
@@ -81,7 +81,34 @@ export default {
     },
     download (filename, text) {
       var pom = document.createElement('a')
-      pom.setAttribute('href', 'data:text/text;charset=utf-8,' + encodeURIComponent(text))
+      let headString = `
+      <!DOCTYPE 
+        html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml">
+        <head><META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>Calzedonia</title>
+            <style>
+                td {
+                    vertical-align:top;
+                    margin: 0;
+                    padding: 0;
+                }
+                table {
+                    border-collapse: collapse;
+                }
+            </style>
+        </head>
+        <body>
+            <table cellpadding="0" cellspacing="0" width="700" align="center">
+      `
+      let footerString = `
+            </table>
+        </body>
+        </html>
+      `
+      pom.setAttribute('href', 'data:text/text;charset=utf-8,' + headString + encodeURIComponent(text) + footerString)
       pom.setAttribute('download', filename)
       if (document.createEvent) {
         var event = document.createEvent('MouseEvents')
@@ -103,7 +130,8 @@ export default {
   },
   components: {
     'element-1': require('@/elements/element1.vue'),
-    'element-2': require('@/elements/element2.vue'),
+    'main-head-element': require('@/elements/mainHeadElement.vue'),
+    'main-image-element': require('@/elements/mainImage.vue'),
     'element-3': require('@/elements/element3.vue')
   }
 }
