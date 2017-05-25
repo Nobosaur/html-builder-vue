@@ -10,7 +10,8 @@
                 <select v-model="selectedElement">
                     <option value="element-1">First element</option>
                     <option value="main-head-element">Header</option>
-                    <option value="main-image-element">Main Image</option>
+                    <option value="main-image-element">Main image</option>
+                    <option value="main-headline">Main headline</option>
                 </select>
                 <div class="block">
                     <a class="button is-primary" @click="addElement">Add</a>
@@ -132,6 +133,7 @@ export default {
     'element-1': require('@/elements/element1.vue'),
     'main-head-element': require('@/elements/mainHeadElement.vue'),
     'main-image-element': require('@/elements/mainImage.vue'),
+    'main-headline': require('@/elements/mainHeadline.vue'),
     'element-3': require('@/elements/element3.vue')
   }
 }
