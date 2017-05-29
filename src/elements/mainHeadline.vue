@@ -1,21 +1,27 @@
 <template>
     <div>
-        <table cellpadding="0" cellspacing="0" width="700" align="center">
+        <table :id="'content-element-' + elementId" cellpadding="0" cellspacing="0" width="700" align="center">
             <tr>
                 <td>
-                    <table width="100%">
-                        <!-- COPY -->
+                    <table cellpadding="0" cellspacing="0" width="700" align="center">
                         <tr>
-                            <td align="center" style="width:60px;" width="60">
-                                &nbsp;
-                            </td>
-                            <td align="center">
-                                <p :style="'line-height:' + lineHeight + 'px; width:100%; text-align:center; font-family: Trebuchet MS, Helvetica, sans-serif; font-size:' + fontSize + 'px; color:#000000; letter-spacing:1px; margin:0;'">
-                                    {{ textFieldInHeader }}
-                                </p>
-                            </td>
-                            <td align="center" style="width:60px;" width="60">
-                                &nbsp;
+                            <td>
+                                <table width="100%">
+                                    <!-- COPY -->
+                                    <tr>
+                                        <td align="center" style="width:60px;" width="60">
+                                            &nbsp;
+                                        </td>
+                                        <td align="center">
+                                            <p :style="'line-height:' + lineHeight + 'px; width:100%; text-align:center; font-family: Trebuchet MS, Helvetica, sans-serif; font-size:' + fontSize + 'px; color:#000000; letter-spacing:1px; margin:0;' + addBoldStyle + addUppercaseStyle">
+                                            {{ textFieldInHeader }}
+                                            </p>
+                                        </td>
+                                        <td align="center" style="width:60px;" width="60">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                     </table>
@@ -36,6 +42,12 @@
                     </p>
                     <input class="input is-primary" v-model="textFieldInHeader"></input>
                 </div>
+                <div class="block">
+                    <a class="button is-primary" @click="boldText">Bold</a>
+                </div>
+                <div class="block">
+                    <a class="button is-primary" @click="uppercaseText">Uppercase</a>
+                </div>
             </div>
         </div>
     </div>
@@ -50,7 +62,31 @@ export default {
     return {
       fontSize: '22',
       lineHeight: this.fontSize + 10,
-      textFieldInHeader: 'Lorem ipsum dolor sit amet'
+      textFieldInHeader: 'Lorem ipsum dolor sit amet',
+      textIsBold: false,
+      addBoldStyle: 'font-weight: normal;',
+      textIsUppercase: false,
+      addUppercaseStyle: 'text-transform: none;'
+    }
+  },
+  methods: {
+    boldText () {
+      if (this.textIsBold === false) {
+        this.textIsBold = true
+        this.addBoldStyle = 'font-weight: bold;'
+      } else {
+        this.textIsBolder = false
+        this.addBoldStyle = 'font-weight: normal;'
+      }
+    },
+    uppercaseText () {
+      if (this.textIsUppercase === false) {
+        this.textIsUppercase = true
+        this.addUppercaseStyle = 'text-transform: uppercase;'
+      } else {
+        this.textIsUppercase = false
+        this.addUppercaseStyle = 'text-transform: none;'
+      }
     }
   }
 }
