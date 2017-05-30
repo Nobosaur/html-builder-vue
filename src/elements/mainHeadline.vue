@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: 'Main Headline',
+  name: 'MainHeadline',
   props: ['elementId'],
   data () {
     return {
@@ -64,9 +64,9 @@ export default {
       lineHeight: this.fontSize + 10,
       textFieldInHeader: 'Lorem ipsum dolor sit amet',
       textIsBold: false,
-      addBoldStyle: 'font-weight: normal;',
+      addBoldStyle: '',
       textIsUppercase: false,
-      addUppercaseStyle: 'text-transform: none;'
+      addUppercaseStyle: ''
     }
   },
   methods: {
@@ -75,8 +75,8 @@ export default {
         this.textIsBold = true
         this.addBoldStyle = 'font-weight: bold;'
       } else {
-        this.textIsBolder = false
-        this.addBoldStyle = 'font-weight: normal;'
+        this.textIsBold = false
+        this.addBoldStyle = ''
       }
     },
     uppercaseText () {
@@ -85,7 +85,7 @@ export default {
         this.addUppercaseStyle = 'text-transform: uppercase;'
       } else {
         this.textIsUppercase = false
-        this.addUppercaseStyle = 'text-transform: none;'
+        this.addUppercaseStyle = ''
       }
     }
   }
