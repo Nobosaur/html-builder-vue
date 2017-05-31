@@ -13,7 +13,7 @@
                             <td align="right">
                                 <p style="font-family:'Arial', sans-serif; font-size:11px; color:#666666;">
                                     <a href="%%view_email_url%%">
-                                        <font color="#666666">{{ eyelinerLocale }}</font>
+                                        <font color="#666666">{{ eyelinerDependLocale }}</font>
                                     </a>
                                 </p>
                             </td>
@@ -33,7 +33,7 @@
                         <tr>
                             <td align="center">
                                 <a :href="'http://calzedonia.commander1.com/c3/?tcs=2254&cmp=' + utmCampaignName +'&chn=newsletter&country=%%Country_of_interest_sf_code%%&med=email&src=%%jobid%%&url=http://' + selectedLocale + '.calzedonia.com/?utm_source=%%jobid%%&utm_medium=email&utm_campaign='+ utmCampaignName">
-                                    <img :src="'http://image.email-calzedonia.com/lib/fe9413727d64007f71/m/' + logoUrlLocale" border="0" style="margin:0px;padding:0px;display:block;" alt="Calzedonia">
+                                    <img :src="'http://image.email-calzedonia.com/lib/fe9413727d64007f71/m/' + logoLocale" border="0" style="margin:0px;padding:0px;display:block;" alt="Calzedonia">
                                 </a>
                             </td>
                         </tr>
@@ -69,19 +69,25 @@ export default {
     logoLocale () {
       if (this.selectedLocale === 'it') {
         this.logoUrlLocale = '1/it-it-clz-logo.jpg'
+        return this.logoUrlLocale
       } else if (this.selectedLocale === 'fr') {
         this.logoUrlLocale = '3/fr-logo-new-clz-v1.jpg'
+        return this.logoUrlLocale
       } else {
         this.logoUrlLocale = '1/all-logo-clz.jpg'
+        return this.logoUrlLocale
       }
     },
     eyelinerDependLocale () {
       if (this.selectedLocale === 'it') {
         this.eyelinerLocale = 'Guarda la versione online'
+        return this.eyelinerLocale
       } else if (this.selectedLocale === 'fr') {
         this.eyelinerLocale = 'Consultez le site internet'
+        return this.eyelinerLocale
       } else {
         this.eyelinerLocale = 'View in webbrowser'
+        return this.eyelinerLocale
       }
     }
   }
