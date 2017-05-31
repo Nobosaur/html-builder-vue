@@ -12,8 +12,8 @@
                             </td>
                             <td align="right">
                                 <p style="font-family:'Arial', sans-serif; font-size:11px; color:#666666;">
-                                    <a href="http://view.email-calzedonia.com/?qs=f05de793bac18e64fed8d04f09fde97b2afb6e7d3dd2051fd47a19a0587ec11c2d0f91a7c42276b61e40639c5b2f72ea241ac2b59b348524e15013a9f67366e91fc086102057a8b4">
-                                        <font color="#666666">View in a browser</font>
+                                    <a href="%%view_email_url%%">
+                                        <font color="#666666">{{ eyelinerLocale }}</font>
                                     </a>
                                 </p>
                             </td>
@@ -32,8 +32,8 @@
                         </tr>
                         <tr>
                             <td align="center">
-                                <a href="http://click.email-calzedonia.com/?qs=e7ee0ab89e3f0db45e218da454b306f6937cd564233832a0488f4691727438ec0f3c1732d9017cfbeacbf7b63aae1614f8c80e767fcaba62">
-                                    <img src="http://image.email-calzedonia.com/lib/fe9413727d64007f71/m/1/all-logo-clz.jpg" border="0" style="margin:0px;padding:0px;display:block;" alt="Calzedonia">
+                                <a :href="'http://calzedonia.commander1.com/c3/?tcs=2254&cmp=' + utmCampaignName +'&chn=newsletter&country=%%Country_of_interest_sf_code%%&med=email&src=%%jobid%%&url=http://' + selectedLocale + '.calzedonia.com/?utm_source=%%jobid%%&utm_medium=email&utm_campaign='+ utmCampaignName">
+                                    <img :src="'http://image.email-calzedonia.com/lib/fe9413727d64007f71/m/' + logoUrlLocale" border="0" style="margin:0px;padding:0px;display:block;" alt="Calzedonia">
                                 </a>
                             </td>
                         </tr>
@@ -57,10 +57,32 @@
 <script>
 export default {
   name: 'Header',
-  props: ['elementId'],
+  props: ['elementId', 'utmCampaignName', 'selectedLocale'],
   data () {
     return {
-      eyelinerValue: 'Lorem ipsum dolor sit amet'
+      eyelinerValue: 'Lorem ipsum dolor sit amet',
+      logoUrlLocale: '1/it-it-clz-logo.jpg',
+      eyelinerLocale: 'Guarda la versione online'
+    }
+  },
+  computed: {
+    logoLocale () {
+      if (this.selectedLocale === 'it') {
+        this.logoUrlLocale = '1/it-it-clz-logo.jpg'
+      } else if (this.selectedLocale === 'fr') {
+        this.logoUrlLocale = '3/fr-logo-new-clz-v1.jpg'
+      } else {
+        this.logoUrlLocale = '1/all-logo-clz.jpg'
+      }
+    },
+    eyelinerDependLocale () {
+      if (this.selectedLocale === 'it') {
+        this.eyelinerLocale = 'Guarda la versione online'
+      } else if (this.selectedLocale === 'fr') {
+        this.eyelinerLocale = 'Consultez le site internet'
+      } else {
+        this.eyelinerLocale = 'View in webbrowser'
+      }
     }
   }
 }

@@ -3,6 +3,19 @@
     <div class="columns">
         <div class="column is-one-quarter">
             <aside class="menu">
+                <p class="menu-label">Select locale:</p>
+                <select v-model="selectedLocale" >
+                    <option value="it">Italy</option>
+                    <option value="fr">France</option>
+                    <option value="lu">Luxembourg</option>
+                    <option value="de">Germany</option>
+                </select>
+                <div class="utm-input-field-wrapper column is-half center">
+                    <p class="menu-label">
+                        Enter UTM campaign name:
+                    </p>
+                    <input class="input is-primary is-6" v-model="utmCampaignName"></input>
+                </div>
                 <p class="menu-label">
                     Add new element
                 </p>
@@ -16,12 +29,7 @@
                 <div class="block">
                     <a class="button is-primary" @click="addElement">Add</a>
                 </div>
-                <div class="utm-input-field-wrapper column is-half center">
-                    <p class="menu-label">
-                        Enter UTM campaign name:
-                    </p>
-                    <input class="input is-primary is-6" v-model="utmCampaignName"></input>
-                </div>
+                
                 <div class="block">
                     <a class="button is-primary" @click="createHtmlFile()">Export HTML</a>
                 </div>
@@ -44,7 +52,7 @@
                             </div>
                         </h3>
                     </div>
-                    <div :is="element.selected" :elementId="index" :utmCampaignName="utmCampaignName" class="message-body"></div>
+                    <div :is="element.selected" :elementId="index" :utmCampaignName="utmCampaignName" :selectedLocale="selectedLocale" class="message-body"></div>
                 </article>
             </div>
         </div>
@@ -59,7 +67,8 @@ export default {
     return {
       selectedElement: 'element-1',
       elementsInList: [],
-      utmCampaignName: '2016-02-05-test'
+      utmCampaignName: '2016-02-05-test',
+      selectedLocale: 'it'
       // isVisible: false
     }
   },
