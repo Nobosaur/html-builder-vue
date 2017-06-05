@@ -14,7 +14,8 @@
                                         </td>
                                         <td align="center">
                                             <p :style="'line-height:' + lineHeight + 'px; width:100%; text-align:center; font-family: Trebuchet MS, Helvetica, sans-serif; font-size:' + fontSize + 'px; color:#000000; letter-spacing:1px; margin:0;' + addBoldStyle + addUppercaseStyle">
-                                            {{ textFieldInHeader }}
+                                            <span v-if="textIsBold">{{ textFieldInHeader }}</span>
+                                            <span v-if="!textIsBold"><b>{{ textFieldInHeader }}</b></span>
                                             </p>
                                         </td>
                                         <td align="center" style="width:60px;" width="60">
@@ -73,10 +74,10 @@ export default {
     boldText () {
       if (this.textIsBold === false) {
         this.textIsBold = true
-        this.addBoldStyle = 'font-weight: bold;'
+        // this.addBoldStyle = 'font-weight: bold;'
       } else {
         this.textIsBold = false
-        this.addBoldStyle = ''
+        // this.addBoldStyle = ''
       }
     },
     uppercaseText () {

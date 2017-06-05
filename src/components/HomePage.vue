@@ -25,6 +25,7 @@
                     <option value="main-head-element">Header</option>
                     <option value="main-image-element">Main image</option>
                     <option value="main-headline">Main headline</option>
+                    <option value="three-products-in-row">Three Products in Row</option>
                 </select>
                 <div class="block">
                     <a class="button is-primary" @click="addElement">Add</a>
@@ -143,7 +144,7 @@ export default {
     'main-head-element': require('@/elements/mainHeadElement.vue'),
     'main-image-element': require('@/elements/mainImage.vue'),
     'main-headline': require('@/elements/mainHeadline.vue'),
-    'element-3': require('@/elements/element3.vue')
+    'three-products-in-row': require('@/elements/threeProuctsInRow.vue')
   }
 }
 </script>

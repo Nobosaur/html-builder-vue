@@ -4,6 +4,7 @@
         Index: {{ elementId }}<br>
         Campaign name: {{ utmCampaignName }}
         Selected locale: {{ selectedLocale }}
+        Product: {{product}}
     </div>
     
 </template>
@@ -11,7 +12,10 @@
 <script>
 export default {
   name: 'element1',
-  props: ['elementId', 'utmCampaignName', 'selectedLocale']
+  props: ['elementId', 'utmCampaignName', 'selectedLocale'],
+  test: 'bla',
+  product: [],
+  errors: []
 }
 
 </script>
