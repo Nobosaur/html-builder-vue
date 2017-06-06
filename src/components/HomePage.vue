@@ -136,7 +136,7 @@ export default {
         elementsToExport.push(getElement)
       }
       elementsToExport.toString()
-      this.download('test.txt', elementsToExport)
+      this.download(this.utmCampaignName + '.txt', elementsToExport)
     }
   },
   components: {
